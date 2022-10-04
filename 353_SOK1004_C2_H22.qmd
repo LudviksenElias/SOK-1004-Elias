@@ -1,4 +1,4 @@
-```{---}
+``` {.unnumbered .unnumbered .unnumbered}
 title: "Case 2"
 author: "353_SOK1004_C2_H22"
 format: pdf
@@ -90,6 +90,8 @@ Lag en figur som viser karbonintensiteten $CI_{t}$ til de fem største økonomie
 df %>% 
   filter(country %in% list) %>% 
   
+  mutate(gdp = gdp/12^10) %>% 
+  
   filter(year >= 1850) %>% 
 
   ggplot(aes(x=year, y=co2_per_gdp, color = country)) + 
@@ -114,6 +116,7 @@ Undersøk hvorvidt bruken av kull som energikilde kan forklare forskjellen i kar
 # be
 
 df %>% 
+  
   filter(country %in% list) %>%
   
   filter(year >= 1850) %>% 
@@ -169,22 +172,23 @@ Lag en figur som viser utviklingen av konsumbasert CO2 per person og totale, kon
 # besvar oppgave IIb her
 
 df %>%
+  
   filter(country %in% list) %>%
 
-  filter(year >= 1990) %>% 
+  ggplot(aes(x=year, y=consumption_co2_per_capita, color = country, size = consumption_co2)) + 
+  geom_point(size = 3) +
   
-  ggplot(aes(x=year, y=consumption_co2_per_capita, color = country)) +
-  
-  geom_line(size = 2.5) 
+  xlim(1990,2020)
 
 df %>% 
+  
   filter(country %in% list) %>%
 
-  filter(year >= 1990) %>% 
-  
   ggplot(aes(x=year, y=consumption_co2, color = country)) +
   
-  geom_line(size = 2.5)
+  geom_line(size = 2.5) +
+  
+  xlim(1990,2020)
 ```
 
 Den første figuren viser CO2 konsum per person i et land fra 1990 - 2019. Den horisontale aksen viser år og den vertikale viser CO2 konsum.
